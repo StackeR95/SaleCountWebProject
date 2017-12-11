@@ -1,18 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HomePageComponent } from './HomePage/HomePage.component';
 
-
-import { AppComponent } from './app.component';
-
+import { AmexioWidgetModule,CommonHttpService } from "amexio-ng-extensions";
+import { FormsModule } from "@angular/forms";
+import { CarouselComponent } from './carousel.component';
 
 @NgModule({
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   declarations: [
-    AppComponent
+    HomePageComponent,
+    CarouselComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AmexioWidgetModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [CommonHttpService],
+  bootstrap: [HomePageComponent]
 })
 export class AppModule { }
