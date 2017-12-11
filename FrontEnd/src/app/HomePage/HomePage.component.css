@@ -1,0 +1,40 @@
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+#bgImage
+{
+  width:100%;
+  height: 100%;
+  
+}
+label.control-label{
+  font-weight: bold;
+  font-size: 30px;
+  -webkit-text-stroke: 0.5px black;
+}
+.MainFrame{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  width: 500px;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes loginMove{ 
+100% {transform: translate(0%,700%);}
+}
+@keyframes regMove{ 
+  100% {transform: translate(0%,1500%);}
+  }
+
+/* Centered text */
+.centered {
+  background-color: #eceeef3b;
+  opacity: 50%;
+  position: relative;
+
+}

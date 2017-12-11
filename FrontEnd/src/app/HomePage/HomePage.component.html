@@ -1,0 +1,86 @@
+<img id="bgImage" src="/assets/images/HomePage/SaleCount.jpg">
+
+<div class="MainFrame">
+    <button id="loginButton" *ngIf="styleString=='' || styleString=='showLogin'" type="submit"  (click)="UserLogIn()" class="btn btn-primary">Login In</button>
+    <button id="registerButton" *ngIf="styleString=='' || styleString=='showRegister'"  type="submit"  (click)="RegistrUser()" class="btn btn-primary">Register</button>
+    <div class="container" >
+    <div id="centeredDiv" class="centered" *ngIf="styleString!=''">
+        <form  *ngIf="styleString=='showLogin'" (ngSubmit)="onSubmit(formData)" #formData="ngForm"  >
+            <amexio-email-input 
+            ngModel
+            name="loginEmail"
+            [fieldLabel]="'Email'" name ="email"
+            [placeholder]="'Enter Email address'"
+            [allowBlank]="false" [errorMsg] ="'Please enter Email address'"
+            [enablePopOver]="true" 
+            [popoverPlacement]="'right'"
+            [iconFeedBack]="true">
+          </amexio-email-input>
+        <amexio-password-input 
+            ngModel
+            name="loginPass"
+            [enablePopOver]="true"  
+            [fieldLabel]="'Password'" name ="password"
+            [placeholder]="'Enter Password'"
+            [allowBlank]="false" 
+            [errorMsg] ="'Please enter password'"
+>
+        </amexio-password-input>
+        <button type="submit" class="btn btn-primary">Login In</button>
+        
+            </form>
+            <form id="registerForm" *ngIf="styleString=='showRegister'" >
+              <!--Text Input with Validations-->
+
+              <amexio-text-input
+                              [fieldLabel]="'First Name'" name ="firstName"
+                              [placeholder]="'Enter First name'"
+                              [allowBlank]="false" [errorMsg] ="'Please enter last name'"
+                              [minLength]="1" [minErrorMsg]="'Minimum 1 char required'"
+                              [maxLength]="10"  [maxErrorMsg]="'Maximum 10 char allowed'"
+                              [iconFeedBack]="true"  [enablePopOver]="true" [popoverPlacement]="'right'">
+              </amexio-text-input>
+              <amexio-text-input
+                  [fieldLabel]="'Last Name'" name ="lastName"
+                  [placeholder]="'Enter Last name'"
+                  [allowBlank]="false" [errorMsg] ="'Please enter last name'"
+                  [minLength]="1" [minErrorMsg]="'Minimum 1 char required'"
+                  [maxLength]="10"  [maxErrorMsg]="'Maximum 10 char allowed'"
+                  [iconFeedBack]="true"  [enablePopOver]="true" [popoverPlacement]="'right'">
+              </amexio-text-input>
+              <amexio-text-input
+              [fieldLabel]="'Address'" name ="Address"
+              [placeholder]="'Enter Address '"
+              [allowBlank]="false" [errorMsg] ="'Please enter last name'"
+              [minLength]="1" [minErrorMsg]="'Minimum 1 char required'"
+              [maxLength]="10"  [maxErrorMsg]="'Maximum 10 char allowed'"
+              [iconFeedBack]="true"  [enablePopOver]="true" [popoverPlacement]="'right'">
+          </amexio-text-input>
+          <amexio-number-input [fieldLabel]="'Phone Number'" name ="phoneNumb"
+          [placeholder]="'Enter Phone Number'">
+          </amexio-number-input>
+              <amexio-email-input [fieldLabel]="'Email'" name ="email"
+              [placeholder]="'Enter Email Id'"
+              [allowBlank]="false" [errorMsg] ="'Please enter Email address'"
+              [enablePopOver]="true" 
+              [popoverPlacement]="'right'"
+              [iconFeedBack]="true">
+            </amexio-email-input>
+          <amexio-password-input 
+              [enablePopOver]="true"  
+              [fieldLabel]="'Password'" name ="password"
+              [placeholder]="'Enter Password'"
+              [allowBlank]="false" 
+              [errorMsg] ="'Please enter password'"
+              [minLength]="6" 
+              [minErrorMsg]="'Minimum 6 char required'"
+              [maxLength]="32"  
+              [maxErrorMsg]="'Maximum 32 char allowed'"
+              [iconFeedBack]="true"
+              [popoverPlacement]="'right'">
+          </amexio-password-input>
+                </form>
+
+    </div>
+    </div>
+</div>

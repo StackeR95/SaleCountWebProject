@@ -5,18 +5,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$userEmail = $_GET["email"] ; 
-$password = $_GET["password"] ; 
-$con = mysqli_connect("localhost","root" , "1234"); 
+$file = file_get_contents('php://input');
+
+
+$checkLogin =$file ; 
+
+for ($i = 0; $i <= 31; ++$i) { 
+   $checkLogin = str_replace(chr($i), "", $checkLogin); 
+}
+$checkLogin = str_replace(chr(127), "", $checkLogin);
+
+if (0 === strpos(bin2hex($checkLogin), 'efbbbf')) {
+  $checkLogin = substr($checkLogin, 3);
+}
+
+$data = json_decode( $checkLogin,true );
+
+$userEmail = $data["email"] ; 
+$password = $data["password"] ; 
+$con = mysqli_connect("localhost","root" , ""); 
                 if ($con)
                 {
-                    echo"you are connected <br>"; 
-                    mysqli_select_db($con, "saleCount") ;
-                   $qString = "select * from users where email=\"$userEmail\" and password =\"$password\""; 
-                    echo $qString."<br>" ; 
+                  //  echo"you are connected <br>"; 
+                    mysqli_select_db($con, "salecount") ;
+                    $qString = "select * from users where email=\"$userEmail\" and password =\"$password\""; 
+                    //echo $qString."<br>" ; 
                      $result = mysqli_query($con , $qString)  ;
-                     if(!$result)
-                         echo 'error happend';
                      $rowCount = mysqli_num_rows($result) ; 
                      
                      $toSend = new \stdClass() ; 
@@ -31,5 +45,5 @@ $con = mysqli_connect("localhost","root" , "1234");
                       echo json_encode($toSend)   ;
                 }
                 else 
-                    echo"connection error"; 
+                   // echo"connection error"; 
   ?>
