@@ -1,10 +1,14 @@
 <?php
 
+header('content-type: application/json'); 
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$toSend = new \stdClass() ; 
+$toSend ->success = false ; 
 $file = file_get_contents('php://input');
 
 
@@ -34,16 +38,18 @@ $con = mysqli_connect("localhost","root" , "");
                      $rowCount = mysqli_num_rows($result) ; 
                      
                      $toSend = new \stdClass() ; 
-                     $toSend ->flag = false ; 
+                     $toSend ->success = false ; 
                      if($rowCount > 0 )
                      {
                          $row = mysqli_fetch_array($result) ; 
                          $toSend -> id = $row["ID"] ; 
-                         $toSend ->flag = true ; 
+                         $toSend ->success = true ; 
                      }
                       
-                      echo json_encode($toSend)   ;
                 }
                 else 
-                   // echo"connection error"; 
+                $toSend ->msg = "Couldn't connect to data base" ; 
+
+      echo json_encode($toSend)   ;
+                
   ?>

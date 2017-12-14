@@ -1,6 +1,10 @@
 <?php
 
+header('content-type: application/json'); 
 
+
+$toSend = new \stdClass() ; 
+$toSend ->success = false ; 
 $file = file_get_contents('php://input');
  
 
@@ -32,20 +36,27 @@ $gender = $data["gender"] ;
 $con = mysqli_connect("localhost","root" , ""); 
 if ($con)
 {
-    echo "you are connected <br>"; 
+    //echo "you are connected <br>"; 
     mysqli_select_db($con, "saleCount") ;
    $qString = "insert into users "
            . "( fName, lName  , address  , email , password , gender , phoneNo )"
            . "values(\"$fName\" , \"$lName\" , \"$address\" , "
            . "\"$userEmail\" , \"$password\" , '$gender' , $phoneNo) "; 
-    echo $qString."<br>" ; 
+    //echo $qString."<br>" ; 
      $result = mysqli_query($con , $qString)  ;
-     if(!$result)
-         echo 'error happend';
+     if(!$result) {
+        if( mysqli_errno($con) == 1062)  ;  // duplicate entry 
+            $toSend-> msg = "You can't manke another rating"; 
+    }
+    else 
+        $toSend->success = true ; 
+    
      
       
-      echo json_encode($result)   ;
 }
 else 
-    echo"connection error"; 
+$toSend ->msg = "Couldn't connect to data base" ; 
+
+echo json_encode($toSend);
+
 ?>
