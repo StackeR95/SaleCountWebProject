@@ -27,7 +27,7 @@ $data = json_decode( $checkLogin,true );
 
 $userEmail = $data["email"] ; 
 $password = $data["password"] ; 
-$con = mysqli_connect("localhost","root" , ""); 
+$con = mysqli_connect("localhost","root" , "1234"); 
                 if ($con)
                 {
                   //  echo"you are connected <br>"; 
