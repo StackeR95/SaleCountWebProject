@@ -1,0 +1,15 @@
+insert into users   ( fName, lName  , address  , email , password , gender , phoneNo )
+	values	('walid' , 'moussa', 'haram city' , 'walidmoussa995@gmial.com', '1234' ,'M' , '01063074739'  ),
+		('ahmed' , 'adel' ,'bervarly' , 'elbrence@hotmail.com','4321','M' ,  '01077076738' ) ;
+
+insert into store   ( name  , address  , email ,phoneNo , discription , pic )
+	values	('Lc Wakiki' , 'Mall of Arabia' , 'lcWakiki@yahoo.com', '01069473719' , 'store were you can find all the clothes you need', "https://dnc2qm9v6i95t.cloudfront.net/cache/Shops/c/c/b/b/f/ccbbf59f0ca545703f3331ef4ffa6078-420x420.png" ),
+		('Nike'  ,'City Stars' , 'Nike@Nike.com', '01099046537' , 'every thing that falcilitates your sporty life can be found at our store' , "nike/globalAssets/social_media_images/nike_swoosh_logo_black.png"  ) ; 
+ 
+ 
+insert into item ( name  ,pic, price ,discount, discription, storeId)
+	values	("men Tshirt" , "https://riverisland.scene7.com/is/image/RiverIsland/304899_main?wid=1200" , 200 , 0.5,"size L , M \n color black, white" , 1 )  , 
+		("blue Jeans" , "https://www.menshealth.com/sites/menshealth.com/files/styles/listicle_slide_custom_user_phone_1x/public/best-jeans-for-men-incotex-slim-fit-stretch-denim-jeans.jpg?itok=N_D7iUTt" , 400 , 0.3 ,"size 30 to 33 \n for men and women" , 1 ),  
+		("cristiano Boot" , "https://c.static-nike.com/a/images/w_960,c_limit,f_auto/tdip3oebyyapr9jauert/nike-mercurial-superfly-5-cr7-campees.jpg" , 1200 , 0.5,"size 40-43 \n color black, white" , 2 ) ,
+                ("Fc Barcelona Jearsy" , "https://i.pinimg.com/originals/eb/d7/6d/ebd76d72db9e82e137d249dda3e560b2.jpg" , 800 , 0.2,"size M, S , L \n " , 2 ) ;
+                        
