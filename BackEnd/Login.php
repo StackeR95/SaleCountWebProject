@@ -39,7 +39,6 @@ $con = mysqli_connect("localhost","root" , "1234");
                      
                      $toSend = new \stdClass() ; 
                      $toSend ->success = false ; 
-                     $toSend ->msg = "Couldn't find a user with this data" ; 
                      if($rowCount > 0 )
                      {
                          $row = mysqli_fetch_array($result) ; 
