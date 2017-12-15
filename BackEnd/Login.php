@@ -7,6 +7,11 @@ header('content-type: application/json');
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+session_start();  
+
+
+
 $toSend = new \stdClass() ; 
 $toSend ->success = false ; 
 $file = file_get_contents('php://input');
@@ -44,6 +49,8 @@ $con = mysqli_connect("localhost","root" , "1234");
                          $row = mysqli_fetch_array($result) ; 
                          $toSend -> id = $row["ID"] ; 
                          $toSend ->success = true ; 
+                         $_SESSION['Logged'] = true ;
+                         
                      }
                       
                 }

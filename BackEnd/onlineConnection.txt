@@ -1,0 +1,41 @@
+ $con = mysqli_connect("sql2.freemysqlhosting.net","sql2210922" , "sM2*tT8!"); 
+                if ($con)
+                {
+                  //  echo"you are connected <br>"; 
+                    mysqli_select_db($con, "sql2210922") ;
+                    $qString = "select * from well" ;  
+                    //echo $qString."<br>" ; 
+                     $result = mysqli_query($con , $qString)  ;
+                     $rowCount = mysqli_num_rows($result) ; 
+                     
+                     $toSend = new \stdClass() ; 
+                     $toSend ->success = false ; 
+                     if($rowCount > 0 )
+                     {
+                         $row = mysqli_fetch_array($result) ; 
+                         $toSend -> id = $row["hello"] ; 
+                         $toSend ->success = true ; 
+                     }
+                      
+                }
+                else 
+                $toSend ->msg = "Couldn't connect to data base" ; 
+
+      echo json_encode($toSend)   ;
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  ////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+	  go to http://www.phpmyadmin.co 
+Server: sql2.freemysqlhosting.net
+Name: sql2210922
+Username: sql2210922
+Password: sM2*tT8!
+Port number: 3306

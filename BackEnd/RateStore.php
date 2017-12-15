@@ -6,8 +6,12 @@ header('content-type: application/json');
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */ 
+
+session_start()  ; 
+
 $toSend = new \stdClass() ; 
-$toSend -> success = false ;
+
+
 
 $userId = $_GET["userId"] ; 
 $storeId = $_GET["storeId"] ; 
@@ -35,5 +39,6 @@ $con = mysqli_connect("localhost","root" , "1234");
                 else 
                     $toSend->msg  = "Couldn't connect to data base";
         echo json_encode($toSend)   ;
+
   
 ?> 

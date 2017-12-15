@@ -1,0 +1,31 @@
+alter table user add column storeOrNot int default 0 
+
+
+ALTER TABLE item MODIFY COLUMN storeId INT NOT NULL,
+ ADD CONSTRAINT storeId_fk
+ FOREIGN KEY(storeId)
+ REFERENCES store(ID) ; 
+
+
+ALTER TABLE rating MODIFY COLUMN storeId INT NOT NULL,
+ ADD CONSTRAINT storeId_rating_fk
+ FOREIGN KEY(storeId)
+ REFERENCES store(ID) ;
+
+
+ALTER TABLE reservations MODIFY COLUMN itemId INT NOT NULL,
+ ADD CONSTRAINT itemId_fk
+ FOREIGN KEY(itemId)
+ REFERENCES item(ID) ;  
+
+
+ALTER TABLE reservations MODIFY COLUMN userId INT NOT NULL,
+ ADD CONSTRAINT userId_fk
+ FOREIGN KEY(userId)
+ REFERENCES users(ID) ;  
+
+
+ALTER TABLE rating MODIFY COLUMN userId INT NOT NULL,
+ ADD CONSTRAINT userId_rating_fk
+ FOREIGN KEY(userId)
+ REFERENCES users(ID) ; 
