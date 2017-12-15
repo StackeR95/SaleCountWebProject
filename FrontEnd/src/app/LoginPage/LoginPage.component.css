@@ -23,7 +23,14 @@ label.control-label{
   width: 500px;
   transform: translate(-50%, -50%);
 }
-
+.btn-primary{
+  font-weight: bold;
+}
+#BackButton{
+  font-weight: bold;
+  position: relative;
+  right: 45%;
+}
 @keyframes loginMove{ 
 100% {transform: translate(0%,700%);}
 }

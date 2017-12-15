@@ -9,11 +9,18 @@ export class HttpService {
  {
  return this.http.get("http://localhost:3000/Sample.php");
  }
- sendLoginData(data)
+ loginUser(data)
  {
    const body=JSON.stringify(data);
    const headers=new Headers();
    headers.append("Content-Type","application/json");
    return this.http.post("http://localhost:3000/Login.php",body,{headers:headers});
+ }
+ registerUser(data)
+ {
+  const body=JSON.stringify(data);
+  const headers=new Headers();
+  headers.append("Content-Type","application/json");
+  return this.http.post("http://localhost:3000/Register.php",body,{headers:headers});
  }
 }

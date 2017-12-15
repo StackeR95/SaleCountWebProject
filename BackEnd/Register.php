@@ -21,16 +21,12 @@ if (0 === strpos(bin2hex($checkLogin), 'efbbbf')) {
 
 $data = json_decode( $checkLogin,true );
 
-foreach ($data as $k=>$v){
-    echo $k; // etc.
-    echo "</br>";
-}
 $userEmail =$data["email"] ; 
 $password = $data["password"] ; 
-$fName = $data["fName"] ; 
-$lName = $data["lName"] ; 
-$address = $data["address"] ;
-$phoneNo = $data["phoneNo"] ; 
+$fName = $data["firstName"] ; 
+$lName = $data["lastName"] ; 
+$address = $data["Address"] ;
+$phoneNo = $data["phoneNumb"] ; 
 $gender = $data["gender"] ; 
 
 $con = mysqli_connect("localhost","root" , ""); 
@@ -46,7 +42,7 @@ if ($con)
      $result = mysqli_query($con , $qString)  ;
      if(!$result) {
         if( mysqli_errno($con) == 1062)  ;  // duplicate entry 
-            $toSend-> msg = "You can't manke another rating"; 
+            $toSend-> msg = "This email is already registered "; 
     }
     else 
         $toSend->success = true ; 
