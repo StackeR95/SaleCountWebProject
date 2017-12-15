@@ -11,9 +11,9 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-                $date = date("Y-m-d h:i:s") ; 
+             //   $date = date("Y-m-d h:i:s") ; 
                 
-                echo $date ; 
+                echo "hello my friend welcome to the Server" ; 
         ?>
     </body>
 </html>
