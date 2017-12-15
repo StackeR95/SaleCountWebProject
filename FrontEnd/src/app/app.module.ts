@@ -9,6 +9,7 @@ import { HttpComponent } from './NetworkBackEnd/http.component';
 import {HttpService} from './NetworkBackEnd/http.service';
 import { HomePageComponent } from './HomePage/home-page.component';
 import { HeaderComponent } from './HomePage/header.component'
+
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

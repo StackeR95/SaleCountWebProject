@@ -21,10 +21,6 @@ if (0 === strpos(bin2hex($checkLogin), 'efbbbf')) {
 
 $data = json_decode( $checkLogin,true );
 
-foreach ($data as $k=>$v){
-    echo $k; // etc.
-    echo "</br>";
-}
 $userEmail =$data["email"] ; 
 $password = $data["password"] ; 
 $fName = $data["fName"] ; 
