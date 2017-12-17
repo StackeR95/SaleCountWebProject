@@ -11,13 +11,13 @@ session_start()  ;
 
 //qeury to get the rating of the store 
 $toSend = new \stdClass() ; 
+$toSend -> success =false ; 
+// if( isset($_SESSION['Logged']) ) 
+//       $toSend -> success = true ; 
+// else
+//     $toSend -> success = false ; // FAAAAAAAAAAAAAAAAAAAALSE
 
-if( isset($_SESSION['Logged']) ) 
-      $toSend -> success = true ; 
-else
-    $toSend -> success = true ; // FAAAAAAAAAAAAAAAAAAAALSE
-
-if(    $toSend -> success == true ){
+//if(    $toSend -> success == true ){
  
                     $storeId = $_GET["storeId"] ; 
                     $userId = $_GET["userId"] ; 
@@ -63,6 +63,6 @@ if(    $toSend -> success == true ){
                     }
                     else 
                         $toSend->msg  = "Couldn't connect to data base" ; 
-            }
+  //          }
     echo json_encode($toSend)   ;
 ?> 

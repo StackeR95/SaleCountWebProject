@@ -49,7 +49,7 @@ $con = mysqli_connect("localhost","root" , "1234");
                          $row = mysqli_fetch_array($result) ; 
                          $toSend -> id = $row["ID"] ; 
                          $toSend ->success = true ; 
-                         $_SESSION['Logged'] = true ;
+                       //  $_SESSION['Logged'] = true ;
                          
                      }
                       
