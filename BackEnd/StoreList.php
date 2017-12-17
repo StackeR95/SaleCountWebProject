@@ -12,7 +12,8 @@ $toSend = new \stdClass() ;
 if( isset($_SESSION['Logged'])) 
       $toSend -> success = true ;        
 else 
-    $toSend -> success =false ;    
+    $toSend -> success =false ;  
+    $toSend -> MSG= "He Came Here";
 
 if(    $toSend -> success == true ){
     
@@ -25,7 +26,7 @@ $con = mysqli_connect("localhost","root" , "1234");
                   //  echo $qString."<br>" ; 
                      $result = mysqli_query($con , $qString)  ;
                      if(!$result)
-                         echo 'error happend';
+                    //     echo 'error happend';
                      $rowCount = mysqli_num_rows($result) ; 
                      
                     // $toSend = new \stdClass() ; 

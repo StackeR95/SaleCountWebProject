@@ -12,9 +12,7 @@ export class HttpComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.httpService.getData().subscribe(
-      (data:Response)=>console.log(data)
-    );
+
   }
 
 }

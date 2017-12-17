@@ -5,9 +5,14 @@ import { Http,Headers } from '@angular/http';
 export class HttpService {
 
   constructor(private  http:Http) { }
-  getData()
+  getStoreData()
  {
- return this.http.get("http://localhost:3000/Sample.php");
+ return this.http.get("http://localhost:3000/StoreList.php");
+ }
+ getItemData(storeID,userID)
+ {
+
+   return this.http.get("http://localhost:3000/StoreItems.php?storeId="+storeID+"&userId="+userID);
  }
  loginUser(data)
  {

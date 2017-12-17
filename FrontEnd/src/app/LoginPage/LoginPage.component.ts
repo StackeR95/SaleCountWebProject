@@ -3,7 +3,8 @@ import { NgIf } from '@angular/common';
 import { HttpService } from '../NetworkBackEnd/http.service';
 import { Response } from '@angular/http/src/static_response';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';  
 @Component({
   selector: 'app-root',
   templateUrl: './LoginPage.component.html',
@@ -15,7 +16,8 @@ export class LoginPageComponent {
   logRegCounter = 0;
   title = 'app';
   styleString = "";
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService,private route: ActivatedRoute, private router: Router) 
+  {  this.route.params.subscribe(res => console.log(res)); }
   UserLogIn() {
     this.styleString = "showLogin";
 
@@ -73,7 +75,9 @@ export class LoginPageComponent {
             divElement.appendChild(aElement);
             divElement.appendChild(strongElement);
             divElement.appendChild(document.createTextNode("Signed In Successfully."));
-            document.getElementById("SignInForm").appendChild(divElement);
+            document.getElementById("SignInForm").appendChild(divElement);  
+            setTimeout(() => {this.router.navigate(['homePage']);}, 2500)
+            
           }
 
         }

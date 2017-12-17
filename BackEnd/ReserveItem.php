@@ -24,7 +24,7 @@ $con = mysqli_connect("localhost","root" , "1234");
                                //        echo $qString."<br>" ; 
                      $result = mysqli_query($con , $qString)  ;
                      if(!$result)
-                         echo 'error happend';
+                      //   echo 'error happend';
                      
                      if(mysqli_affected_rows($con)>0 )
                      {
