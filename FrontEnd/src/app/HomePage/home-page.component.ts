@@ -19,39 +19,47 @@ export class HomePageComponent implements OnInit {
         this.storesJson=data.json();
         var containerDiv=document.createElement('div');
         var rowDiv=document.createElement('div');
-        console.log(this.storesJson);
-          for(var i =0;i<this.storesJson.Stores.length;i++)
-          {
-            var colDiv=document.createElement('div');
-            var storeImage=document.createElement('img');
-            var middleDiv=document.createElement('div');
-            var linkDiv=document.createElement('a');
-            var textDiv=document.createElement('div')
-            containerDiv.className="container";
-            rowDiv.className="row";
-            colDiv.className="col";
-            storeImage.className="image";
-            middleDiv.className="middle";
-            textDiv.className="text";
-            if(i %3==0)
+        console.log("data Recieved" , this.storesJson);
+        if(this.storesJson["success"]== true){ 
+            for(var i =0;i<this.storesJson.Stores.length;i++)
             {
-              var rowDiv=document.createElement('div');
+              var colDiv=document.createElement('div');
+              var storeImage=document.createElement('img');
+              var middleDiv=document.createElement('div');
+              var linkDiv=document.createElement('a');
+              var textDiv=document.createElement('div')
+              containerDiv.className="container";
               rowDiv.className="row";
-              containerDiv.appendChild(rowDiv);
+              colDiv.className="col";
+              storeImage.className="image";
+              middleDiv.className="middle";
+              textDiv.className="text";
+              if(i %3==0)
+              {
+                var rowDiv=document.createElement('div');
+                rowDiv.className="row";
+                containerDiv.appendChild(rowDiv);
+              }
+              storeImage.setAttribute("src",this.storesJson.Stores[i].pic)
+              storeImage.setAttribute("style","width:100%")
+              storeImage.id=this.storesJson.Stores[i].ID;
+              colDiv.appendChild(storeImage);
+              textDiv.innerHTML=this.storesJson.Stores[i].name;
+              linkDiv.setAttribute("href","/store/"+storeImage.id);
+              linkDiv.appendChild(textDiv)
+              middleDiv.appendChild(linkDiv);
+              colDiv.appendChild(middleDiv);
+              containerDiv.lastChild.appendChild(colDiv);
+              document.getElementById("header").appendChild(containerDiv);
+              
             }
-            storeImage.setAttribute("src",this.storesJson.Stores[i].pic)
-            storeImage.setAttribute("style","width:100%")
-            storeImage.id=this.storesJson.Stores[i].ID;
-            colDiv.appendChild(storeImage);
-            textDiv.innerHTML=this.storesJson.Stores[i].name;
-            linkDiv.setAttribute("href","/store/"+storeImage.id);
-            linkDiv.appendChild(textDiv)
-            middleDiv.appendChild(linkDiv);
-            colDiv.appendChild(middleDiv);
-            containerDiv.lastChild.appendChild(colDiv);
-            document.getElementById("header").appendChild(containerDiv);
-            
-          }
+        }else {
+          console.log("hello im in the else") ; 
+          this.router.navigate(['']);
+          alert("please Login First") ; 
+        }
+
+
         
       
       })

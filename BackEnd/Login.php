@@ -1,8 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *'); 
 header("Access-Control-Allow-Methods", "POST, GET");
-
-header('content-type: application/json'); 
+include "token.php" ; 
+//header('content-type: application/json'); 
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -52,7 +52,7 @@ $con = mysqli_connect("localhost","root" , "1234");
                          $ID =   $row["ID"] ;
                          $toSend -> id = $ID ; 
                          $toSend ->success = true ; 
-                         $token = GenerateToken($ID) ; 
+                         $token =token::  GenerateToken($ID) ; 
                          $toSend ->token = $token ;                          
                          updateUserToken($con , $token , $ID , $toSend) ; 
                        //  $_SESSION['Logged'] = true ;
@@ -70,13 +70,5 @@ $con = mysqli_connect("localhost","root" , "1234");
         $result = mysqli_query($con , $qString)  ;
       } 
 
-      function GenerateToken ($userId){
-        include 'jwt_helper.php' ;
-        $key = "wello&dola are the best"; 
-        $token = array();
-        $token['id'] =$userId;
-        $token =  JWT::encode($token, $key);
-        return $token ; 
-      }
                 
   ?>

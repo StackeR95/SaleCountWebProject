@@ -12,14 +12,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            include 'jwt_helper.php' ;
-            $key = "wello&dola are the best"; 
-            $token = array();
-            $token['id'] = 2;
-            $token =  JWT::encode($token, $key); 
-            echo $token."<br>" ; 
-
-           echo  JWT::decode($token, $key)->id;
+            include "token.php" ; 
+            $con = mysqli_connect("localhost","root" , "1234"); 
+            mysqli_select_db($con, "saleCount") ;            
+            $token = token:: GenerateToken(5) ;
+            if(token:: checkToken($con , $token) ) 
+                echo "yes" ;
+            else 
+                echo "no" ; 
+            
         ?>
     </body>
 </html>

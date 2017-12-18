@@ -1,6 +1,6 @@
 <?php
 header('content-type: application/json'); 
-
+include "token.php" ; 
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,15 +17,15 @@ $toSend -> success =false ;
 //     $toSend -> MSG= "He Came Here";
 
 //if(    $toSend -> success == true ){
-echo "hi"; 
+$token= ' '  ; 
 if(isset($_GET["token"]))
     $token = $_GET["token"]; 
-    
+
 $con = mysqli_connect("localhost","root" , "1234"); 
                 if ($con)
                 {
                     mysqli_select_db($con, "saleCount") ;                    
-                   if (checkToken($con , $token) ) { 
+                   if (token :: checkToken($con , $token) ) { 
                     // echo"you are connected <br>"; 
                         $qString = "select * from store"; 
                     //  echo $qString."<br>" ; 
@@ -56,19 +56,4 @@ $con = mysqli_connect("localhost","root" , "1234");
        echo json_encode($toSend)   ;
 
 
-       function checkToken($con , $token){
-            include 'jwt_helper.php' ;
-            $key = "wello&dola are the best"; 
-            $ID=  JWT::decode($token, $key)->id;
-            $qString = "select * from users where ID=$ID"; 
-            //echo $qString ; 
-            $result = mysqli_query($con , $qString)  ;
-            if(!$result)
-                return false ; 
-            if(mysqli_num_rows($result)>0)
-                return true ; 
-            else 
-                return false ; 
-
-       } 
 ?> 

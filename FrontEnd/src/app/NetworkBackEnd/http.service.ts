@@ -11,13 +11,23 @@ export class HttpService {
     return this.http.get("http://localhost:3000/ReserveItem.php?userId="+userID+"&itemId="+itemID);
   }
   getStoreData()
+  {
+  var token =  localStorage.getItem("token") ; 
+  console.log("in get store data service " ,"http://localhost:3000/StoreList.php?token="+token );
+  if(typeof(token)!="undefined")
+     return this.http.get("http://localhost:3000/StoreList.php?token="+token);
+  else 
+    return this.http.get("http://localhost:3000/StoreList.php");
+  
+  }
+ getItemData(storeID)
  {
- return this.http.get("http://localhost:3000/StoreList.php");
- }
- getItemData(storeID,userID)
- {
-
-   return this.http.get("http://localhost:3000/StoreItems.php?storeId="+storeID+"&userId="+userID);
+    var token =  localStorage.getItem("token") ; 
+    console.log("in get item data service" , "http://localhost:3000/StoreItems.php?storeId="+storeID+"&token="+token);
+    if(typeof(token)!="undefined")
+       return this.http.get("http://localhost:3000/StoreItems.php?storeId="+storeID+"&token="+token);
+    else 
+       return this.http.get("http://localhost:3000/StoreItems.php") ; 
  }
  loginUser(data)
  {

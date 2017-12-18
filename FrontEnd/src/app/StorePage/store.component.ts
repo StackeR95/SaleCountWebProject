@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     //  this.showDivs(this.slideIndex);
-    this.httpService.getItemData(this.storeID, 1).subscribe((data) => {
+    this.httpService.getItemData(this.storeID).subscribe((data) => {
       // console.log(data.json());
       var itemsJson = data.json();
       if (itemsJson['success'] == true) {
@@ -110,7 +110,13 @@ export class StoreComponent implements OnInit {
         }
       }
       else{
-        alert("No Avaliable Items For This Store");
+        if(itemsJson["msg"].indexOf("token")!== -1) // the error is because of the token 
+          {
+            this.router.navigate(['']);
+            alert("please Login First") ; 
+          }
+        else 
+           alert("No Avaliable Items For This Store");
       }
      
     })

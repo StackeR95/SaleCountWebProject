@@ -77,6 +77,7 @@ export class LoginPageComponent {
             divElement.appendChild(document.createTextNode("Signed In Successfully."));
             document.getElementById("SignInForm").appendChild(divElement);
             localStorage.setItem("userID",Res['id']);  
+            localStorage.setItem("token" , Res["token"]);             
             setTimeout(() => {this.router.navigate(['homePage']);}, 2500)
             
           }
