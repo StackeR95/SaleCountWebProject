@@ -24,10 +24,12 @@ $con = mysqli_connect("localhost","root" , "1234");
                                //        echo $qString."<br>" ; 
                      $result = mysqli_query($con , $qString)  ;
                      if(!$result)
-                      //   echo 'error happend';
-                     
+                    {
+                        $toSend->msg = "Couldn't update data" ; 
+                    }
                      if(mysqli_affected_rows($con)>0 )
                      {
+                       
                          $toSend->success=true ; 
                          $qString = "insert into reservations values("
                                  . "$userId , $itemId , '$date')" ;
@@ -37,7 +39,7 @@ $con = mysqli_connect("localhost","root" , "1234");
                          
                      }
                      else 
-                         $toSend->msg = "this item is not available anymore" ; 
+                         $toSend->msg = "This item is not available anymore" ; 
                     
                   
                 }
