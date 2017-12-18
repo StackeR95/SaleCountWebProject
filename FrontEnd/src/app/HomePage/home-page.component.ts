@@ -16,20 +16,10 @@ export class HomePageComponent implements OnInit {
   {
       this.httpService.getStoreData().subscribe((data)=>
       {
-        console.log("data = ");
-        console.log(data);
         this.storesJson=data.json();
         var containerDiv=document.createElement('div');
         var rowDiv=document.createElement('div');
         console.log(this.storesJson);
-        if(this.storesJson.success==false)
-        {
-         
-          setTimeout(()=>{alert("Please Login First")},2000);
-          this.router.navigate(['']);
-        }
-        else
-        {
           for(var i =0;i<this.storesJson.Stores.length;i++)
           {
             var colDiv=document.createElement('div');
@@ -54,7 +44,7 @@ export class HomePageComponent implements OnInit {
             storeImage.id=this.storesJson.Stores[i].ID;
             colDiv.appendChild(storeImage);
             textDiv.innerHTML=this.storesJson.Stores[i].name;
-            linkDiv.setAttribute("href","wwww.facebook.com");
+            linkDiv.setAttribute("href","/store/"+storeImage.id);
             linkDiv.appendChild(textDiv)
             middleDiv.appendChild(linkDiv);
             colDiv.appendChild(middleDiv);
@@ -62,7 +52,7 @@ export class HomePageComponent implements OnInit {
             document.getElementById("header").appendChild(containerDiv);
             
           }
-        }
+        
       
       })
 

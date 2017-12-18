@@ -1,11 +1,16 @@
 <html>
-
+  
 <app-header></app-header>
 
 <div id="mainDiv" class="w3-content" >
-       
-  </div>
 
+    <button id="reserveButton"(click)="reserveItem()" style="display:none;" class="w3-btn w3-white  w3-border-red w3-round-large">Reserve item</button>
+</div>
 
+<amexio-dialog [title]="'Status'" [(showWindow)]="flag" [dialogType]="1"  (actionStatus)="checkStatus($event)" [primaryActionLabel]="'Ok'">
+    <amexio-pane-body [bodyCClass]="'alert-dialog'">
+     <p id="resultMessage"></p>
+    </amexio-pane-body>
+</amexio-dialog>
 
 </html>

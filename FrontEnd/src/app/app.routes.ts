@@ -3,7 +3,7 @@ import { LoginPageComponent } from "./LoginPage/LoginPage.component"
 import { RouterModule , Routes }from "@angular/router"
 import { HomePageComponent }from "./HomePage/home-page.component"
 const APP_ROUTES=[
-{ path:'store',component:StoreComponent },
+{ path:'store/:storeId',component:StoreComponent },
 { pathMatch: 'full',path:'',component:LoginPageComponent },
 { pathMatch: 'full',path:'homePage',component:HomePageComponent }
 ];

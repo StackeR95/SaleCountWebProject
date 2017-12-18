@@ -5,6 +5,11 @@ import { Http,Headers } from '@angular/http';
 export class HttpService {
 
   constructor(private  http:Http) { }
+
+  reserveItem(userID,itemID)
+  {
+    return this.http.get("http://localhost:3000/ReserveItem.php?userId="+userID+"&itemId="+itemID);
+  }
   getStoreData()
  {
  return this.http.get("http://localhost:3000/StoreList.php");
