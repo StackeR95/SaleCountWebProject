@@ -8,9 +8,12 @@ header('content-type: application/json');
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+ 
 // Get All user Details in userDeatils variable sent in Json 
 //Method GET 
 //query parameters  token: the token of the user  
+//test url : http://localhost:3000/GetUserDetails.php?token=(get token from login)
 session_start();  
 
 

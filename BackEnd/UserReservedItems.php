@@ -7,6 +7,12 @@ include "token.php" ;
  * and open the template in the editor.
  */ 
 
+ 
+//get All user reserved items   
+//Method GET 
+//parameters syntax     token
+
+// test url : http://localhost:3000/UserReservedItems.php?token=(get token from login)
 session_start()  ; 
 
 //qeury to get the rating of the store 
@@ -16,7 +22,6 @@ $toSend -> success =false ;
 $token= ' '  ; 
 if(isset($_GET["token"]))
     $token = $_GET["token"]; 
-$storeId = $_GET["storeId"] ; 
 $userId=99;
 //$userId = $_GET["userId"] ; 
 $con = mysqli_connect("localhost","root" , "1234"); 
@@ -26,8 +31,11 @@ $con = mysqli_connect("localhost","root" , "1234");
                     mysqli_select_db($con, "saleCount") ;
                     if (token:: checkToken($con , $token , $userId) ) { 
                          
-                    $qString = "select * from item where storeId =$storeId"; 
-                    //  echo $qString."<br>" ; 
+                    $qString ="select i.name as itemName , i.pic itemPic , i.discription , i.price ,
+                    i.discount, r.reservationDate , s.name as storeName , s.pic as storePic , s.address 
+                    ,i.ID as itemId , r.userId
+                    from item i, reservations r , store s where 
+                    i.ID = r.itemId and s.ID = i.storeId  and r.userId= $userId"; //  echo $qString."<br>" ; 
                     $result = mysqli_query($con , $qString)  ;
                             
                         if(!$result)
@@ -37,30 +45,13 @@ $con = mysqli_connect("localhost","root" , "1234");
                         if(mysqli_num_rows($result)!=0){ 
                         
                         //$toSend ->flag = false ; 
+                            $toSend->success = true ; 
+                        
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                                $toSend->success = true ; 
                                 $toSend->items[] = $row ;      
                             }
-                            $qString = "select avg(rate) as average from rating where storeId =$storeId";                 
-                            $result = mysqli_query($con , $qString)  ;
-                            $row = mysqli_fetch_assoc($result) ; 
-                            
-                            
-                            
-                            $qString = "select userId from rating where storeId =$storeId"
-                                    . " and userId=$userId";                 
-                            $result = mysqli_query($con , $qString);                      
-                            $rowCount = mysqli_num_rows($result) ; 
-                            
-                            if ($rowCount > 0 ) 
-                                $toSend->rated  = true ;
-                            else 
-                                $toSend->rated = false ; 
-
-                            
-                            
-                            $toSend -> rating = $row["average"] ; 
+                                                        
                         }else 
                              $toSend->msg= "No Items" ;
                     
