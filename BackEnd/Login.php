@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *'); 
+header("Access-Control-Allow-Methods", "POST, GET");
 
 header('content-type: application/json'); 
 
@@ -46,9 +48,13 @@ $con = mysqli_connect("localhost","root" , "1234");
                      $toSend ->success = false ; 
                      if($rowCount > 0 )
                      {
-                         $row = mysqli_fetch_array($result) ; 
-                         $toSend -> id = $row["ID"] ; 
+                         $row = mysqli_fetch_array($result) ;
+                         $ID =   $row["ID"] ;
+                         $toSend -> id = $ID ; 
                          $toSend ->success = true ; 
+                         $token = GenerateToken($ID) ; 
+                         $toSend ->token = $token ;                          
+                         updateUserToken($con , $token , $ID , $toSend) ; 
                        //  $_SESSION['Logged'] = true ;
                          
                      }
@@ -58,5 +64,19 @@ $con = mysqli_connect("localhost","root" , "1234");
                 $toSend ->msg = "Couldn't connect to data base" ; 
 
       echo json_encode($toSend)   ;
+
+      function updateUserToken($con ,  $token , $userId , $toSend ){         
+        $qString = "update users set token='$token' where ID=$userId";
+        $result = mysqli_query($con , $qString)  ;
+      } 
+
+      function GenerateToken ($userId){
+        include 'jwt_helper.php' ;
+        $key = "wello&dola are the best"; 
+        $token = array();
+        $token['id'] =$userId;
+        $token =  JWT::encode($token, $key);
+        return $token ; 
+      }
                 
   ?>
