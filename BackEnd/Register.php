@@ -29,7 +29,7 @@ $address = $data["address"] ;
 $phoneNo = $data["phoneNo"] ; 
 $gender = $data["gender"] ; 
 
-$con = mysqli_connect("localhost","root" , ""); 
+$con = mysqli_connect("localhost","root" , "1234"); 
 if ($con)
 {
     //echo "you are connected <br>"; 
