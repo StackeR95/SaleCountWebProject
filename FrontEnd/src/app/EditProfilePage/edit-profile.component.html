@@ -1,0 +1,82 @@
+<div class="mainPage">
+  <app-header></app-header>
+  <div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+    <div class="row">
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div id="responseDiv" style="visibility:hidden" class="alert alert-info alert-dismissable">
+          <a  class="panel-close close" data-dismiss="alert">×</a>
+          <i  id="responseMessage" class="fa fa-fire"></i>
+        </div>
+        <h3>Personal info</h3>
+
+        <form  class="form-horizontal" (ngSubmit)="submitNewChanges(formData)" #formData="ngForm" >
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input  name="fName" required value={{fName}} [(ngModel)]=fName class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input  name="lName" required value={{lName}} [(ngModel)]=lName class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Address:</label>
+            <div class="col-lg-8">
+              <input  name="address" required value={{address}} [(ngModel)]=address class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input name="email" value={{email}} [(ngModel)]=email class="form-control" type="text" disabled>
+            </div>
+          </div>
+          
+          <div class="form-group">
+              <label class="col-lg-3 control-label">Gender:</label>
+              <div class="col-lg-8">
+                <div class="ui-select">
+                  <select  name="gender" required value={{gender}} [(ngModel)]=gender class="form-control">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          
+          <div class="form-group">
+              <label class="col-lg-3 control-label">Phone Number:</label>
+              <div class="col-lg-8">
+                  <input value={{phoneNo}} required name="phoneNo" [(ngModel)]=phoneNo class="form-control" type="number" >
+                </div>
+            </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password:</label>
+            <div class="col-md-8">
+              <input name="password" required [(ngModel)]=password class="form-control" type="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input  name="password2" required [(ngModel)]=password2 class="form-control" type="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-primary" id="registerButton">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>

@@ -1,0 +1,27 @@
+.mainPage
+{
+    background-color: black;
+    height: 100%;
+    width: 100%;
+}
+.col-md-3 control-label ,h1{
+    color:white;
+    /* font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif !important;*/
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+    color: white;
+    font-size: 18px;
+}
+.col-md-8 {
+
+    text-align: center !important;
+}
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }

@@ -1,0 +1,72 @@
+html
+{
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+.mySlides {
+    display:none
+}
+.w3-border {
+    border: 5px solid darkcyan!important;
+}
+
+.demo {
+    cursor:pointer;
+    margin-bottom:20px;
+}
+img{
+    height: 400px !important; 
+    width: 400px !important; 
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.mySlides{
+    height:400px;
+    width:400px;
+    margin-bottom: 40px;
+    float:left;
+}
+.w3-content
+{
+    margin-top: 20px;
+    margin-left: 20px;
+    max-width:5500px;
+}
+.w3-row {
+    -webkit-margin-collapse: collapse;
+}
+.form-group {
+    height: 400px;
+    margin-bottom: 1rem;
+    width: fit-content;
+    float: right;
+    position: absolute;
+    left: 500px;
+    background-color: white;
+}
+p {
+    color: black;
+    margin-bottom: .5rem;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.w3-border-red, .w3-hover-border-red:hover{
+    border-style: solid;
+    float: right;
+    border-color: #f44336!important;
+}
+.w3-white, .w3-hover-white:hover {
+    font-size: 20px;
+    color: #000!important;
+    background-color: #fff!important;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    position: absolute;
+    left: 200px;
+    top: 320px;
+}
+.alert-dialog{
+    margin: 30px; text-align: center;
+    }
