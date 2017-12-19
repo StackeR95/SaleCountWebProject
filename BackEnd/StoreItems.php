@@ -38,7 +38,17 @@ $con = mysqli_connect("localhost","root" , "1234");
                         
                         //$toSend ->flag = false ; 
                             while ($row = mysqli_fetch_assoc($result))
-                            {
+                            {   //echo "hel" ; 
+                               // var_dump($row) ;
+                                $itemId =  $row["ID"] ; 
+                                $qString = "select * from reservations where userId=$userId
+                                            and itemId =$itemId" ; 
+                                $result2 = mysqli_query($con , $qString)    ;
+                                if( mysqli_num_rows($result2) > 0 ) 
+                                     $row["reserved"] = true ;   
+                                else 
+                                     $row["reserved"] = false ;   
+                             
                                 $toSend->success = true ; 
                                 $toSend->items[] = $row ;      
                             }
