@@ -44,10 +44,16 @@ if ($con)
         if( mysqli_errno($con) == 1062)  ;  // duplicate entry 
             $toSend-> msg = "this store already exist "; 
     }
-    else 
+    else {
         $toSend->success = true ; 
-    
-     
+        $StoreID = mysqli_insert_id($con) ; 
+        
+        $qString = "insert into users "
+        . "( email, password , storeOrNot) "
+        . "values(\"$storeEmail\" , '1234' ,$StoreID  ) "; 
+ //echo $qString."<br>" ; 
+         $result = mysqli_query($con , $qString)  ;
+    }
       
 }
 else 
