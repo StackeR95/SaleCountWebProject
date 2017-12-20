@@ -5,8 +5,33 @@ import { Http,Headers } from '@angular/http';
 export class HttpService {
 
   constructor(private  http:Http) { }
-
-
+  cancelReservation(userID,itemID)
+  {
+    return this.http.get("http://localhost:3000/CancelReservation.php?userId="+userID+"&itemId="+itemID);
+  }
+  RateStore(userID,storeID,rate)
+  {
+    return this.http.get("http://localhost:3000/RateStore.php?userId="+userID+"&storeId="+storeID+"&rate="+rate);
+  }
+addNewStore(data)
+{
+  const body=JSON.stringify(data);
+  const headers=new Headers();
+  headers.append("Content-Type","application/json");
+  return this.http.post("http://localhost:3000/AddStore.php",body,{headers:headers});
+  
+}
+logOutUser(userID)
+{
+  return this.http.get("http://localhost:3000/deleteUserToken.php?userId="+userID);
+}
+addStoreItems(data)
+{
+  const body=JSON.stringify(data);
+  const headers=new Headers();
+  headers.append("Content-Type","application/json");
+  return this.http.post("http://localhost:3000/AddItem.php",body,{headers:headers});
+}
   updateUserData(data)
   {
     const body=JSON.stringify(data);

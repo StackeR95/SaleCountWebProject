@@ -42,15 +42,15 @@ if ($con)
      $result = mysqli_query($con , $qString)  ;
      if(!$result) {
         if( mysqli_errno($con) == 1062)  ;  // duplicate entry 
-            $toSend-> msg = "this store already exist "; 
+            $toSend-> msg = "This store already exists   "; 
     }
     else {
         $toSend->success = true ; 
         $StoreID = mysqli_insert_id($con) ; 
         
         $qString = "insert into users "
-        . "( email, password , storeOrNot) "
-        . "values(\"$storeEmail\" , '1234' ,$StoreID  ) "; 
+        . "( fName,lName,email, password , storeOrNot) "
+        . "values(\"$name\",'Store',\"$storeEmail\" , '1234' ,$StoreID  ) "; 
  //echo $qString."<br>" ; 
          $result = mysqli_query($con , $qString)  ;
     }

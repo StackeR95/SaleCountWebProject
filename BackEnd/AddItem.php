@@ -26,7 +26,7 @@ $pic = $data["pic"] ;
 $discription = $data["discription"] ; 
 $price =$data["price"] ;
 $discount =$data["discount"] ;
-$quntity =$data["quntity"] ;
+$quantity =$data["quantity"] ;
 $storeId =$data["storeId"] ;
 
 
@@ -39,8 +39,8 @@ if ($con)
     mysqli_select_db($con, "saleCount") ;
    $qString = "insert into item "
            . "( name, price  , discount , quantity , pic , discription , storeId )"
-           . "values(\"$name\"  , \"$price\" ,$discount, "
-           .  " $quntity , \"$pic\" , \"$discription\" , $storeId ) "; 
+           . " values(\"$name\"  , \"$price\" ,$discount, "
+           .  " $quantity , \"$pic\" , \"$discription\" , $storeId ) "; 
     $toSend->query = $qString ; 
     //echo $qString."<br>" ; 
      $result = mysqli_query($con , $qString)  ;

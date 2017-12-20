@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../NetworkBackEnd/http.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  userName:any;
+  constructor(private httpService:HttpService) { }
 
   ngOnInit() {
+    this.httpService.getUserData().subscribe((Response)=>{
+      var Result=Response.json();
+      if(Result['success']==true)
+      {
+        var Name=Result.UserDetails['fName']+" "+Result.UserDetails['lName'];
+        this.userName=Name;
+      }
+
+    })
+   
   }
 
 }

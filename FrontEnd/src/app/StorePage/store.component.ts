@@ -13,29 +13,40 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StoreComponent implements OnInit {
 
-  newreleases: any;
   slideIndex = 1;
-  itemsArray = [];
   storeID: any;
+  public max:number = 5;
+  public rate:number = 1;
+  public isReadonly:boolean = false;
+  public isPercent:boolean = true;
   constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.storeID = parseInt(activatedRoute.snapshot.params['storeId']);
   }
-
+  ratedStore()
+  {
+    this.isReadonly=true;
+    var userID=localStorage.getItem("userID");
+    this.httpService.RateStore(userID,this.storeID,this.rate).subscribe((Response)=>{
+      console.log(Response);
+    })
+  }
   ngOnInit() {
-    //  this.showDivs(this.slideIndex);
     this.httpService.getItemData(this.storeID).subscribe((data) => {
-      // console.log(data.json());
       var itemsJson = data.json();
-      if (itemsJson['success'] == true) {
+      if (itemsJson['success'] == true) 
+      {
+        if(itemsJson.rated==true)
+        {
+          this.rate=itemsJson.rating|0;
+          this.isReadonly=true;
+        }
         localStorage.setItem("itemsData", JSON.stringify(itemsJson.items));
-        this.itemsArray = itemsJson.items;
         var mainDiv = document.getElementById("mainDiv");
         for (var i = 0; i < itemsJson.items.length; i++) {
           var temp = document.createElement("img");
           temp.className = "mySlides w3-border";
           temp.setAttribute("src", itemsJson.items[i].pic);
           temp.setAttribute("style", "width:100;display:none;");
-
           mainDiv.appendChild(temp);
         }
         var dataDiv = document.createElement("div");
@@ -88,7 +99,7 @@ export class StoreComponent implements OnInit {
             var jsonData = JSON.parse(localStorage.getItem("itemsData"));
             var label = "Name : ";
             document.getElementById("name").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].name;
-            label = "Discrption : ";
+            label = "Description : ";
             document.getElementById("discrip").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].discription;
             label = "Price : ";
             document.getElementById("price").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].price;
@@ -101,7 +112,7 @@ export class StoreComponent implements OnInit {
             dataDiv.setAttribute("style", "display:block;")
             dots[parseInt(this.getAttribute("alt"))].className += " w3-opacity-off";
 
-            window.scrollTo(0, 0);
+            document.getElementById("mainDiv").scrollIntoView();
           }
 
           columnDiv.appendChild(imageDiv);
@@ -112,8 +123,9 @@ export class StoreComponent implements OnInit {
       else{
         if(itemsJson["msg"].indexOf("token")!== -1) // the error is because of the token 
           {
+           
+            alert("Cannnot Show You Store Data Without Logging in ,,Please Login First") ; 
             this.router.navigate(['']);
-            alert("please Login First") ; 
           }
         else 
            alert("No Avaliable Items For This Store");
@@ -127,7 +139,6 @@ export class StoreComponent implements OnInit {
     try {
       var itemID = localStorage.getItem("selectedItemID");
       var userID = localStorage.getItem("userID");
-      //userID = "2";
       console.log(userID);
     }
     catch (e) {
@@ -145,6 +156,7 @@ export class StoreComponent implements OnInit {
         else {
           this.flag = !this.flag;
           document.getElementById("resultMessage").innerHTML = "Item reserved successfully ";
+          window.location.reload();
         }
       }
       catch (e) {

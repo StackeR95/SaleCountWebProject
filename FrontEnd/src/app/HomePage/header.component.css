@@ -3,3 +3,18 @@
   right:0;
   left:unset;
 }
+.w3-container, .w3-panel {
+  padding: unset;
+}
+p {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.titleName
+{
+  width: fit-content;
+  height: 0px;
+  float: right;
+  margin-top: 10px;
+}

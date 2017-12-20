@@ -16,6 +16,9 @@ html
     cursor:pointer;
     margin-bottom:20px;
 }
+.amexio-rating[_ngcontent-c2]{
+    float:right;
+}
 img{
     height: 400px; 
     width: 400px; 

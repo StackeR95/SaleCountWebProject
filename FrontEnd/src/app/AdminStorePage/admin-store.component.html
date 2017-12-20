@@ -1,0 +1,63 @@
+<html>
+<app-header></app-header>
+<div class="container">
+    <div id="responseDiv" style="visibility:hidden" class="alert alert-info alert-dismissable">
+        <a  class="panel-close close" data-dismiss="alert">×</a>
+        <i  id="responseMessage" class="fa fa-fire"></i>
+      </div>
+  <form class="form-horizontal" (ngSubmit)="addStoreItems(formData)" #formData="ngForm">
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-text-input [fieldLabel]="'Item Name'" ngModel name="name" [placeholder]="'Enter item name'" [iconFeedBack]="true">
+        </amexio-text-input>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-text-input [fieldLabel]="'Description'" ngModel name="discription" [placeholder]="'Enter item descrption'" [iconFeedBack]="true">
+        </amexio-text-input>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4">
+        <label>Upload Image</label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default btn-file">
+              Browse…
+              <input (change)="onChange($event)" type="file" id="imgInp">
+            </span>
+          </span>
+          <input type="text" name="pic" [(ngModel)]="imagePath" class="form-control" readonly>
+        </div>
+        <img id='img-upload' />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-number-input [fieldLabel]="'Price'" ngModel name="price" [placeholder]="'Enter item price'">
+        </amexio-number-input>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4">
+          <amexio-number-input [fieldLabel]="'Discount'" ngModel name="discount" [placeholder]="'Enter item price'">
+            </amexio-number-input>
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <amexio-number-input [fieldLabel]="'Quantity'" ngModel name="quantity" [placeholder]="'Enter item price'">
+              </amexio-number-input>
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-4">
+              <button type="submit" class="btn btn-primary" id="registerButton">Add Item</button>
+          </div>
+        </div>
+  </form>
+</div>
+
+</html>

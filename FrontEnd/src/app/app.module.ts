@@ -13,7 +13,10 @@ import { StoreComponent } from './StorePage/store.component'
 import { routing }from "./app.routes";
 import { MainPageComponent } from './MainPage/main-page.component';
 import { EditProfileComponent } from './EditProfilePage/edit-profile.component';
-import { ReservedItemsComponent } from './ReservedItemsPage/reserved-items.component'
+import { ReservedItemsComponent } from './ReservedItemsPage/reserved-items.component';
+import { AdminStoreComponent } from './AdminStorePage/admin-store.component';
+import { SuperAdminComponent } from './AdminSuperPage/super-admin.component';
+import { LogOutComponent } from './log-out.component'
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -27,7 +30,10 @@ import { ReservedItemsComponent } from './ReservedItemsPage/reserved-items.compo
     StoreComponent,
     MainPageComponent,
     EditProfileComponent,
-    ReservedItemsComponent
+    ReservedItemsComponent,
+    AdminStoreComponent,
+    SuperAdminComponent,
+    LogOutComponent
   ],
   imports: [
     BrowserModule,

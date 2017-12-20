@@ -50,6 +50,8 @@ $con = mysqli_connect("localhost","root" , "1234");
                      {
                          $row = mysqli_fetch_array($result) ;
                          $ID =   $row["ID"] ;
+                         $storeOrNot=$row["storeOrNot"];
+                         $toSend ->storeOrNot=$storeOrNot;
                          $toSend -> id = $ID ; 
                          $toSend ->success = true ; 
                          $token =token::  GenerateToken($ID) ; 

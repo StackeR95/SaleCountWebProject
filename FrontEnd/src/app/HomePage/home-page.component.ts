@@ -19,8 +19,9 @@ export class HomePageComponent implements OnInit {
         this.storesJson=data.json();
         var containerDiv=document.createElement('div');
         var rowDiv=document.createElement('div');
-        console.log("data Recieved" , this.storesJson);
-        if(this.storesJson["success"]== true){ 
+      //  console.log("data Recieved" , this.storesJson);
+        if(this.storesJson["success"]== true)
+        { 
             for(var i =0;i<this.storesJson.Stores.length;i++)
             {
               var colDiv=document.createElement('div');
@@ -53,15 +54,12 @@ export class HomePageComponent implements OnInit {
               document.getElementById("header").appendChild(containerDiv);
               
             }
-        }else {
-          console.log("hello im in the else") ; 
-          this.router.navigate(['']);
-          alert("please Login First") ; 
         }
-
-
-        
-      
+        else 
+        { 
+          this.router.navigate(['']);
+          alert("Can't be in Home Page Without Logging in ,, please Login First") ; 
+        }
       })
 
   }

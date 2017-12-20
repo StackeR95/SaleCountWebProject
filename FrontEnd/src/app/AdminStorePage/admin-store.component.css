@@ -1,0 +1,54 @@
+html
+{
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+label{
+    color:white;
+    font-family:"Comic Sans MS", cursive, sans-serif;;
+    font-size: 20px;
+    font-weight: bold;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 100%;
+}
+.input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group {
+    margin-right: -1px;
+    color: black;
+    background-color: white;
+}
+.input-group .form-control:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    width: auto;
+}
+#img-upload {
+    width: 200px;
+    height: 200px;
+    display:none;
+}
+.alert {
+    margin-top: 10px;
+}

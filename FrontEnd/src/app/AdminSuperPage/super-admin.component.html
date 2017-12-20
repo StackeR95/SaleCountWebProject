@@ -1,0 +1,69 @@
+<html>
+<app-header></app-header>
+<div class="container">
+    <div id="responseDiv" style="visibility:hidden" class="alert alert-info alert-dismissable">
+        <a  class="panel-close close" data-dismiss="alert">×</a>
+        <i  id="responseMessage" class="fa fa-fire"></i>
+      </div>
+  <form class="form-horizontal" (ngSubmit)="addStore(formData)" #formData="ngForm">
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-text-input [fieldLabel]="'Store Name'" ngModel name="name" [placeholder]="'Enter Store Name'" [iconFeedBack]="true">
+        </amexio-text-input>
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+          <label>Upload Image</label>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <span class="btn btn-default btn-file">
+                Browse…
+                <input (change)="onChange($event)" type="file" id="imgInp">
+              </span>
+            </span>
+            <input type="text" name="pic" [(ngModel)]="imagePath" class="form-control" readonly>
+          </div>
+          <img id='img-upload' />
+        </div>
+      </div>
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-email-input [fieldLabel]="'Store Email'" ngModel name="email" [placeholder]="'Enter Store Email Address'" [allowBlank]="false"
+          [errorMsg]="'Please enter Email Id'" [enablePopOver]="true" [popoverPlacement]="'right'" [iconFeedBack]="true">
+        </amexio-email-input>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4">
+          <amexio-text-input [fieldLabel]="'Address'" ngModel name="address" [placeholder]="'Enter Store Address'" [iconFeedBack]="true">
+            </amexio-text-input>
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <amexio-text-input [fieldLabel]="'Description'" ngModel name="discription" [placeholder]="'Enter Store Description'" [iconFeedBack]="true">
+              </amexio-text-input>
+        </div>
+      </div>
+  
+    <div class="form-group">
+      <div class="col-sm-4">
+        <amexio-number-input [fieldLabel]="'Phone Number'" ngModel name="phoneNo" [placeholder]="'Enter Store Phone Number'">
+        </amexio-number-input>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" id="registerButton">Add Store</button>
+      </div>
+    </div>
+    <div id="responseDiv" style="visibility:hidden" class="alert alert-info alert-dismissable">
+        <a  class="panel-close close" data-dismiss="alert">×</a>
+        <i  id="responseMessage" class="fa fa-fire"></i>
+      </div>
+  </form>
+</div>
+
+</html>

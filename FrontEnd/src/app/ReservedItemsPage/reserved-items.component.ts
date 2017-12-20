@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../NetworkBackEnd/http.service';
 import { ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reserved-items',
@@ -9,25 +10,49 @@ import { ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class ReservedItemsComponent implements OnInit {
-  itemsArray = [];
-  constructor(private htttpService:HttpService) { }
+  constructor(private htttpService:HttpService,private router:Router) { }
 
+  cancelReservation()
+  {
+    var itemID=localStorage.getItem("selectedItemID");
+    var userID=localStorage.getItem("userID");
+ //   console.log("user ID = "+userID+" itemID = "+itemID);
+    this.htttpService.cancelReservation(userID,itemID).subscribe((Response)=>{
+
+      try {
+        var result = Response.json();
+        if (result['success'] == false) {
+          this.flag = !this.flag;
+          document.getElementById("resultMessage").innerHTML = "An Error Occured :" + result['msg'];
+        }
+        else {
+          this.flag = !this.flag;
+          document.getElementById("resultMessage").innerHTML = "Reservation is canceled sucessfully";
+          window.location.reload();
+        }
+      }
+      catch (e) {
+        console.log("Error in Resrved Items"+e);
+      }
+
+    })
+  }
   ngOnInit() 
   {
     this.htttpService.getUserReservedItems().subscribe((Response)=>{
-      console.log(Response.json());
+      
       var itemsJson = Response.json();
       if (itemsJson['success'] == true) 
       {
-        this.itemsArray = itemsJson.items;
+        localStorage.setItem("reservedItems",JSON.stringify(itemsJson.items));
         var mainDiv = document.getElementById("mainDiv");
         for (var i = 0; i < itemsJson.items.length; i++) {
           var temp = document.createElement("img");
           temp.className = "mySlides w3-border";
           temp.setAttribute("src", itemsJson.items[i].itemPic);
           temp.setAttribute("style", "width:100;display:none;");
-
           mainDiv.appendChild(temp);
+          
         }
         var dataDiv = document.createElement("div");
         dataDiv.className = "form-group w3-border";
@@ -63,7 +88,7 @@ export class ReservedItemsComponent implements OnInit {
           var imageDiv = document.createElement("img");
           imageDiv.className = "demo w3-opacity";
           imageDiv.setAttribute("src", itemsJson.items[i].itemPic);
-          imageDiv.id = itemsJson.items[i].ID;
+          imageDiv.id = itemsJson.items[i].itemId;
           imageDiv.setAttribute("alt", i.toString());
 
           imageDiv.onclick = function () {
@@ -76,10 +101,11 @@ export class ReservedItemsComponent implements OnInit {
             for (i = 0; i < dots.length; i++) {
               dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
             }
-            var jsonData = JSON.parse(localStorage.getItem("itemsData"));
+            var jsonData = JSON.parse(localStorage.getItem("reservedItems"));
+     //       console.log(jsonData);
             var label = "Name : ";
             document.getElementById("name").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].itemName;
-            label = "Discrption : ";
+            label = "Descrption : ";
             document.getElementById("discrip").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].discription;
             label = "Price : ";
             document.getElementById("price").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].price;
@@ -92,7 +118,7 @@ export class ReservedItemsComponent implements OnInit {
             dataDiv.setAttribute("style", "display:block;")
             dots[parseInt(this.getAttribute("alt"))].className += " w3-opacity-off";
 
-            window.scrollTo(0, 0);
+            document.getElementById("mainDiv").scrollIntoView();
           }
 
           columnDiv.appendChild(imageDiv);
@@ -101,16 +127,26 @@ export class ReservedItemsComponent implements OnInit {
         }
       }
       else{
-        if(itemsJson["msg"].indexOf("token")!== -1) // the error is because of the token 
+        if(itemsJson["msg"].indexOf("token")!=-1) // the error is because of the token 
           {
-         //   this.router.navigate(['']);
-            alert("please Login First") ; 
+            this.router.navigate(['']);
+            alert("Cannot show you resereved items without logging in ..Please Login First") ; 
           }
         else 
-           alert("No Avaliable Items For This Store");
+           alert("No reserved items found");
       }
      
     })
   
+  }
+  flag: boolean;
+  alertStatus: string;
+
+  toggle() {
+    this.flag = !this.flag;
+  }
+
+  checkStatus(v) {
+    this.alertStatus = v;
   }
 }
