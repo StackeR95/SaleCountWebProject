@@ -7,7 +7,14 @@
     <i class="fa fa-home" aria-hidden="true"></i>  
     </a>
     <a href="/reservedItems" class="w3-bar-item  w3-button w3-xlarge">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      </a>
+      <a href="/addItems" *ngIf="userType=='storeAdmin'" class="w3-bar-item w3-button w3-xlarge">
+        <i class="fa fa-plus" aria-hidden="true"></i>  
+        </a>
+        <a href="/createStore" *ngIf="userType=='superAdmin'" class="w3-bar-item w3-button w3-xlarge">
+          <i class="fa fa-plus" aria-hidden="true"></i>  
+          </a>
     <div class="w3-dropdown-hover w3-bar-item  w3-xlarge">
         <i class="fa fa-user" aria-hidden="true"></i>
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -15,6 +22,7 @@
         <a href="/logOut" class="w3-bar-item w3-button">Log Out</a>
       </div>
     </div>
+
   </div>
 </div>
 <!--
