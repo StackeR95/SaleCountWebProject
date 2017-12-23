@@ -7,7 +7,7 @@
         <amexio-rating-input (click)="ratedStore()" [(ngModel)]="rate" [max]="max" name="rate" [readonly]="isReadonly">
         </amexio-rating-input>
     </div>
-    <button id="reserveButton" (click)="reserveItem()" style="display:none;" class="w3-btn w3-white  w3-border-red w3-round-large">Reserve item</button>
+    <button id="reserveButton"  (click)="reserveItem()" style="display:none;" class="w3-btn w3-white  w3-border-red w3-round-large">Reserve item</button>
 </div>
 
 <amexio-dialog [title]="'Status'" [(showWindow)]="flag" [dialogType]="1" (actionStatus)="checkStatus($event)" [primaryActionLabel]="'Ok'">

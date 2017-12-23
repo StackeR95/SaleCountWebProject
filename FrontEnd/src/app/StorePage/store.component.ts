@@ -15,30 +15,44 @@ export class StoreComponent implements OnInit {
 
   slideIndex = 1;
   storeID: any;
-  public max:number = 5;
-  public rate:number = 1;
-  public isReadonly:boolean = false;
-  public isPercent:boolean = true;
+  public max: number = 5;
+  public rate: number = 1;
+  public isReadonly: boolean = false;
+  public isPercent: boolean = true;
   constructor(private httpService: HttpService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.storeID = parseInt(activatedRoute.snapshot.params['storeId']);
   }
-  ratedStore()
-  {
-    this.isReadonly=true;
-    var userID=localStorage.getItem("userID");
-    this.httpService.RateStore(userID,this.storeID,this.rate).subscribe((Response)=>{
-      console.log(Response);
+  ratedStore() {
+    this.isReadonly = true;
+    var userID = localStorage.getItem("userID");
+    this.httpService.RateStore(userID, this.storeID, this.rate).subscribe((Response) => {
+
+    })
+  }
+  checkRservedItems() {
+    this.httpService.getUserReservedItems().subscribe((Response) => {
+      var Result = Response.json();
+      var reservedList = [];
+      if(Result['success']==true)
+      {
+        for (var i = 0; i < Result.items.length; i++) {
+
+          reservedList[i] = Result.items[i].itemId;
+        }
+        localStorage.setItem("reservedList", reservedList.toString());
+      }
+
     })
   }
   ngOnInit() {
+    localStorage.setItem("isReserved", "false");
     this.httpService.getItemData(this.storeID).subscribe((data) => {
+      this.checkRservedItems();
       var itemsJson = data.json();
-      if (itemsJson['success'] == true) 
-      {
-        if(itemsJson.rated==true)
-        {
-          this.rate=itemsJson.rating|0;
-          this.isReadonly=true;
+      if (itemsJson['success'] == true) {
+        if (itemsJson.rated == true) {
+          this.rate = itemsJson.rating | 0;
+          this.isReadonly = true;
         }
         localStorage.setItem("itemsData", JSON.stringify(itemsJson.items));
         var mainDiv = document.getElementById("mainDiv");
@@ -88,6 +102,28 @@ export class StoreComponent implements OnInit {
 
           imageDiv.onclick = function () {
             localStorage.setItem("selectedItemID", this.id);
+            var reservList = localStorage.getItem("reservedList");
+            console.log(reservList);
+            if(reservList!=null)
+            {
+              var compare = reservList.split(',')
+              var check = false
+              for (var k = 0; k < compare.length; k++) {
+                console.log(compare[k]);
+                console.log("ID =" + this.id);
+                if (compare[k] == this.id) {
+                  check = true;
+                  alert("Item is Already reserved");
+                  document.getElementById("reserveButton").setAttribute("style", "display:none");
+                  localStorage.setItem("isReserved", "true");
+                }
+            }
+
+            }
+            if(check==false)
+            {
+              localStorage.setItem("isReserved", "false");
+            }
             var x = document.getElementsByClassName("mySlides");
             var dots = document.getElementsByClassName("demo");
             for (i = 0; i < x.length; i++) {
@@ -107,7 +143,9 @@ export class StoreComponent implements OnInit {
             document.getElementById("discount").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].discount;
             label = "Quantity : ";
             document.getElementById("quantity").innerHTML = label + jsonData[parseInt(this.getAttribute("alt"))].quantity;
-            document.getElementById("reserveButton").setAttribute("style", "display:block;")
+            if (localStorage.getItem("isReserved") == "false") {
+              document.getElementById("reserveButton").setAttribute("style", "display:block;")
+            }
             x[parseInt(this.getAttribute("alt"))].setAttribute("style", "display:block");
             dataDiv.setAttribute("style", "display:block;")
             dots[parseInt(this.getAttribute("alt"))].className += " w3-opacity-off";
@@ -120,26 +158,26 @@ export class StoreComponent implements OnInit {
           rowDiv.appendChild(containerDiv);
         }
       }
-      else{
-        if(itemsJson["msg"].indexOf("token")!== -1) // the error is because of the token 
-          {
-           
-            alert("Cannnot Show You Store Data Without Logging in ,,Please Login First") ; 
-            this.router.navigate(['']);
-          }
-        else 
-           alert("No Avaliable Items For This Store");
+      else {
+        if (itemsJson["msg"].indexOf("token") !== -1) // the error is because of the token 
+        {
+
+          alert("Cannnot Show You Store Data Without Logging in ,,Please Login First");
+          this.router.navigate(['']);
+        }
+        else
+          alert("No Avaliable Items For This Store");
       }
-     
+
     })
 
   }
   reserveItem() {
-    console.log("Item Reserve Function ");
+    //  console.log("Item Reserve Function ");
     try {
       var itemID = localStorage.getItem("selectedItemID");
       var userID = localStorage.getItem("userID");
-      console.log(userID);
+      //   console.log(userID);
     }
     catch (e) {
       console.log("Error Type " + e);
